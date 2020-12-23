@@ -1,4 +1,4 @@
-# instargram_clone_with_flutter
+# instagram_clone_with_flutter
 
 Flutter Language Study
 
