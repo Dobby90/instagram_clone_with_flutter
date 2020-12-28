@@ -14,6 +14,7 @@ class _SearchPageState extends State<SearchPage> {
     double height = screenSize.height;
 
     return Scaffold(
+      appBar: AppBar(),
       body: _buildBody(width, height),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
