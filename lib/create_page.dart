@@ -65,7 +65,7 @@ class _CreatePageState extends State<CreatePage> {
   }
 
   Future<void> _getImage() async {
-    var pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
+    final pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _image = pickedFile;
     });
