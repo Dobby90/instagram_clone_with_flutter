@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class DetailPostPage extends StatelessWidget {
@@ -46,7 +44,10 @@ class DetailPostPage extends StatelessWidget {
                 ],
               ),
             ),
-            Image.network(document['photoUrl']),
+            Hero(
+              tag: document['photoUrl'],
+              child: Image.network(document['photoUrl']),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
