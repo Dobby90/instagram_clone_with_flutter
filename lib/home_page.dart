@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  final User user;
+
+  HomePage(this.user);
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -53,17 +58,20 @@ class HomePage extends StatelessWidget {
                             width: 80.0,
                             height: 80.0,
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage('https://pbs.twimg.com/profile_images/1274753603899518976/lvBoRdDD.jpg'),
+                              backgroundImage: NetworkImage(user.photoURL),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(6.0),
                           ),
                           Text(
-                            'Email Adress',
+                            user.email,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          Text('Name'),
+                          Padding(
+                            padding: EdgeInsets.all(5.0),
+                          ),
+                          Text(user.displayName),
                           Padding(
                             padding: EdgeInsets.all(10.0),
                           ),
