@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram_clone_with_flutter/create_page.dart';
@@ -37,23 +38,36 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _buildBody(double width, double height) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 1.0,
-        mainAxisSpacing: 1.0,
-        crossAxisSpacing: 1.0,
-      ),
-      itemCount: 5,
-      itemBuilder: (BuildContext context, int index) {
-        return _buildListItem(context, index);
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('post').where('email', isEqualTo: widget.user.email).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        var items = snapshot.data.documents ?? []; // documents is null -> items = []
+
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1.0,
+            mainAxisSpacing: 1.0,
+            crossAxisSpacing: 1.0,
+          ),
+          itemCount: items.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildListItem(context, items[index]);
+          },
+        );
       },
     );
   }
 
-  Widget _buildListItem(BuildContext context, int index) {
+  Widget _buildListItem(context, document) {
     return Image.network(
-      'https://image.fmkorea.com/files/attach/new/20200629/14339012/1009639079/2967169244/25580e3af679a2433085bf91588933a6.jpg',
+      document['photoUrl'],
       fit: BoxFit.cover,
     );
   }
