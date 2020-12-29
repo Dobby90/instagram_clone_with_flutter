@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram_clone_with_flutter/create_page.dart';
 
 class SearchPage extends StatefulWidget {
+  final User user;
+
+  SearchPage(this.user);
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -21,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreatePage(),
+              builder: (context) => CreatePage(widget.user),
             ),
           );
         },

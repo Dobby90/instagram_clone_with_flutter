@@ -21,7 +21,7 @@ class _TabPageState extends State<TabPage> {
   void initState() {
     _pages = [
       HomePage(widget.user),
-      SearchPage(),
+      SearchPage(widget.user),
       AccountPage(widget.user),
     ];
     super.initState();
